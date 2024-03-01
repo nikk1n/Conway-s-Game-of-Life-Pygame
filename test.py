@@ -6,7 +6,7 @@ from pathlib import Path
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
-os.chdir(Path("C:/Users/User/PycharmProjects/Game of life/Sprites"))
+os.chdir(Path("C:/Users/User/PycharmProjects/Life of Game/Sprites"))
 os.getcwd()
 pygame.mixer.music.load("background.wav")
 pygame.mixer.music.play(-1)
