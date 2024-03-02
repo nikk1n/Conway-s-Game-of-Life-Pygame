@@ -176,10 +176,10 @@ class InputBox:
         self.active = False
         object_list.append(self)
 
-    def handle_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
+    def handle_event(self, some_event):
+        if some_event.type == pygame.MOUSEBUTTONDOWN:
             # If the user clicked on the input_box rect.
-            if self.rect.collidepoint(event.pos):
+            if self.rect.collidepoint(some_event.pos):
                 # Toggle the active variable.
                 self.active = not self.active
                 self.text = ''
@@ -187,15 +187,15 @@ class InputBox:
                 self.active = False
             # Change the current color of the input box.
             self.color = (135, 206, 250) if self.active else (0, 0, 0)
-        if event.type == pygame.KEYDOWN:
+        if some_event.type == pygame.KEYDOWN:
             if self.active:
-                if event.key == pygame.K_RETURN:
+                if some_event.key == pygame.K_RETURN:
                     print(self.text)
                     self.text = ''
-                elif event.key == pygame.K_BACKSPACE:
+                elif some_event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
-                elif event.unicode.isdigit():
-                    self.text += event.unicode
+                elif some_event.unicode.isdigit():
+                    self.text += some_event.unicode
                 # Re-render the text.
                 self.txt_surface = my_font.render(self.text, True, (0, 0, 0))
 
