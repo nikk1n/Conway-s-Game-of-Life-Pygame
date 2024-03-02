@@ -12,6 +12,7 @@ pygame.mixer.music.load("background.wav")
 pygame.mixer.music.play(-1)
 button_click = pygame.mixer.Sound("button.wav")
 init_sound = pygame.mixer.Sound("menu.wav")
+print(button_click.get_volume())
 fps = 60
 clock = pygame.time.Clock()
 my_font = pygame.font.SysFont('Arial MC', 44)
@@ -32,6 +33,8 @@ m_cell_size = int(min((Info.current_w - 100) / cell_x_amount, (Info.current_h - 
 X = 1200
 Y = 520
 screen = pygame.display.set_mode((X, Y))
+music_on = True
+sound_on = True
 mode = "menu"
 
 
@@ -251,6 +254,28 @@ def leave():
     sys.exit()
 
 
+def mute_sound():
+    global sound_on
+    if sound_on:
+        button_click.set_volume(0)
+        init_sound.set_volume(0)
+        sound_on = False
+    else:
+        button_click.set_volume(1)
+        init_sound.set_volume(1)
+        sound_on = True
+
+
+def mute_music():
+    global music_on
+    if music_on:
+        pygame.mixer.music.stop()
+        music_on = False
+    else:
+        pygame.mixer.music.play(-1)
+        music_on = True
+
+
 def start():
     cell_dimensions = []
     for inp in input_boxes:
@@ -282,6 +307,10 @@ def start():
     Button(main_objects, 170, 5, 30, 30, ("random_reg.png", "random_hover.png", "random_press.png"), g.randomize)
     Button(main_objects, X - 90, 5, 30, 30, ("back_reg.png", "back_hover.png", "back_press.png"), back)
     Button(main_objects, X - 50, 5, 30, 30, ("quit_reg.png", "quit_hover.png", "quit_press.png"), leave)
+    Button(main_objects, X - 130, 5, 30, 30, ("soundon_reg.png", "soundon_hover.png", "soundon_press.png"), mute_sound,
+           ("soundoff_reg.png", "soundoff_hover.png", "soundoff_press.png"))
+    Button(main_objects, X - 170, 5, 30, 30, ("musicon_reg.png", "musicon_hover.png", "musicon_press.png"), mute_music,
+           ("musicoff_reg.png", "musicoff_hover.png", "musicoff_press.png"))
     init_sound.play()
     mode = "main"
     pygame.time.delay(100)
