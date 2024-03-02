@@ -12,7 +12,6 @@ pygame.mixer.music.load("background.wav")
 pygame.mixer.music.play(-1)
 button_click = pygame.mixer.Sound("button.wav")
 init_sound = pygame.mixer.Sound("menu.wav")
-print(button_click.get_volume())
 fps = 60
 clock = pygame.time.Clock()
 my_font = pygame.font.SysFont('Arial MC', 44)
@@ -334,6 +333,10 @@ for line in rules.split('\n'):
     mar += 30
 TextBox(menu_objects, 2, Y / 1.9, "Before starting you need to choose the size of your x by y grid:", size=32)
 Button(menu_objects, X // 2 - 125, Y - 150, 300, 150, ("start_reg.png", "start_hover.png", "start_press.png"), start)
+Button(menu_objects, X - 130, Y-50, 30, 30, ("soundon_reg.png", "soundon_hover.png", "soundon_press.png"), mute_sound,
+       ("soundoff_reg.png", "soundoff_hover.png", "soundoff_press.png"))
+Button(menu_objects, X - 170, Y-50, 30, 30, ("musicon_reg.png", "musicon_hover.png", "musicon_press.png"), mute_music,
+       ("musicoff_reg.png", "musicoff_hover.png", "musicoff_press.png"))
 while running:
     if mode == "main":
         screen.fill((200, 200, 200))
